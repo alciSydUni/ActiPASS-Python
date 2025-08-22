@@ -63,7 +63,7 @@ def readGenericCSV(PATH:str) -> Tuple[pd.DataFrame,float,float,str]:
         print(f'Error: {e}')
 
     return Data, SF, deviceID, devType
-
+ 
 
 def valueExtract(headLs: List[str], key: str, isStringBool: bool):
     for line in headLs:
@@ -80,31 +80,3 @@ def valueExtract(headLs: List[str], key: str, isStringBool: bool):
 
 def matlabDatenum (date: datetime) -> float:
     return (date - datetime(1,1,1) + timedelta(days= 366)).total_seconds() / 86400
-
-    
-
-'''
-## -> optionals
-
-#get string values for each header row
-        row_DevID = [line.lower().startswith("id=") for line in headLs]
-        row_SF = [line.lower().startswith("sf=") for line in headLs]
-        row_startT = [line.lower().startswith("start=") for line in headLs]
-        row_devtype = [line.lower().startswith("devtype=") for line in headLs]
-
-
- #check if 'True' exists in logical lists for row_DevID, row_SF and row_startT
-        if not any(row_DevID) or not any(row_SF) or not any(row_startT):
-            raise ValueError("Unrecognized generic CSV format")
-
-#use row_devtype header line if it exists, if not use 'generic'
-        if any(row_devtype):
-            devType_matches = [line for line, match in zip(headLs,row_devtype) if match]
-            devType = devType_matches[0].split("=",1)[1].strip() if devType_matches else "Generic"
-        else:
-            devType = "Generic"
-
-#set 'deviceID' and 'SF'
-        deviceID = [line for line, match in zip(headLs,row_DevID) if match][0].split("=",1)[1].strip()
-        SF = [line for line, match in zip(headLs, row_SF) if match][0].split("=",1)[1].strip()
-'''
