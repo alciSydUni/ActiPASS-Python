@@ -1,7 +1,8 @@
 from datetime import datetime, timedelta
-from typing import Tuple, List
+from typing import Tuple, List, Union
 import pandas as pd
 import numpy as np
+
 
 def readGenericCSV(PATH:str) -> Tuple[pd.DataFrame,float,float,str]:
     
@@ -80,3 +81,11 @@ def valueExtract(headLs: List[str], key: str, isStringBool: bool):
 
 def matlabDatenum (date: datetime) -> float:
     return (date - datetime(1,1,1) + timedelta(days= 366)).total_seconds() / 86400
+
+def matlabDatenumArr (dates: Union[List[datetime], np.ndarray]) -> np.ndarray:
+    yearOne = datetime(1,1,1)
+    delta = timedelta(days=366)
+    return np.array([(d - yearOne + delta).total_seconds()/86400 for d in dates]) #(N,)
+
+
+    

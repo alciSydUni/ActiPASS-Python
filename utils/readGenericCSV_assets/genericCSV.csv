@@ -1,5 +1,5 @@
-tdevType = Accelerometer  
-id = 123456  
+devType = Accelerometer
+id = 123456
 sf = 10.0
 start = 20250814T095000.000
 comment = test run  
