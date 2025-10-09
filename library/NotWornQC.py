@@ -11,7 +11,7 @@ def NotWornQC(Acc: pd.DataFrame,
     meanTEMP: np.ndarray, #shape: (len(smplsOf1S),) OR (0,)
     diaryStrct: List[Dict[str,Any]], #defined as: [{} for _ in range(len(subjectIDs))] from open_diary.py
     Fs: int,
-    smplsOf1S: List[int]  #list: index values for Acc - Fs apart - starting from 0
+    smplsOf1S: np.ndarray  #list: index values for Acc - Fs apart - starting from 0
 ) -> Tuple[NDArray[np.bool_], NDArray[np.bool_], NDArray[np.float_], List[str]]:
 
     ## -> variable definitions
