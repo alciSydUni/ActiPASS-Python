@@ -6,7 +6,7 @@ from datetime import datetime,timedelta
 from scipy.signal import medfilt
 from library.QCFlipRotation import MatlabBwareaopen
 import rle
-
+from .HelperFunctions import RLEIndeces
 
 def WarmNightT(
     meanTEMP: np.ndarray,
@@ -27,6 +27,7 @@ def WarmNightT(
         for d in MatlabDatenumToDatetimeArr([time1SFromAccTrim.iloc[0],time1SFromAccTrim.iloc[-1]]):            
             if d.strftime('%b') in ["Jun","Jul","Aug"]:
                 warningStr.append("Summer months, possible incorrect bedtimes used for flip detection")
+#               >>> need to add something to break out of FOR loop after one detection or warningStr will flood <<<                
         #   median filtering | meanTEMP is (N,) from smplsOf1S
         meanTEMPFiltered = medfilt(meanTEMP, kernel_size=tMedFWin)
         logicWarm = meanTEMPFiltered > tempLimit
@@ -58,14 +59,6 @@ def WarmNightT(
         warningStr.append("Possible bedtime over-estimate for flip detection")
     
     return warmNightLogic, warningStr
-
-def RLEIndeces(values: np.ndarray, counts: np.ndarray) -> Tuple[NDArray[np.int64], NDArray[np.int64]]:
-    startIndeces = np.zeros_like(values, dtype = int)
-    endIndeces = np.zeros_like(values, dtype = int)
-    for i in range(len(values)):
-        startIndeces[i] = sum(counts[:i])
-        endIndeces[i] = startIndeces[i] + counts[i] - 1
-    return startIndeces, endIndeces
 
 def MatlabDatenumToDatetime(mlDatenum: float) -> datetime:
     return datetime(1,1,1) + timedelta(days=mlDatenum-366)

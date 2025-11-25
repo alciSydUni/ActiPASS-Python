@@ -31,8 +31,8 @@ def NotWornQC(Acc: pd.DataFrame,
     #initialize with one column per subjectID to give -> shape (MxN) -> (len(smplTimes),len(diaryStrct))
     #use len(diaryStrct) = 1 -> all sizes below Nx1
     notWornLogic = np.zeros((len(smplTimes), len(diaryStrct)), dtype=bool) #Nx1
-    NWForce = np.zeros((len(smplTimes),len(diaryStrct)), dtype=bool) #Nx1
-    nightLogic = np.zeros((len(smplTimes),len(diaryStrct)), dtype=bool) #Nx1
+    NWForce = np.zeros((len(smplTimes), len(diaryStrct)), dtype=bool) #Nx1
+    nightLogic = np.zeros((len(smplTimes), len(diaryStrct)), dtype=bool) #Nx1
 
     ## -> get moving-STD, row-wise mean and sum
     movSTDAcc = Acc[['X','Y','Z']].rolling(window=filtWinSz, center=True,min_periods=1).std(ddof=0)
