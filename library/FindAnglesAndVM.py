@@ -26,6 +26,7 @@ def FindAnglesAndVM(Acc,SF,Fc):
     #+ve acceleration = dip in front facing Y-axis
     #resulting in -ve angle, which is flipped to +ve
     V = np.column_stack((Inc, U, -np.arcsin(normAcc[:,1])))
+
     return V, AccFilt, SVM, normAcc
 
 ## -> pandas DataFrame

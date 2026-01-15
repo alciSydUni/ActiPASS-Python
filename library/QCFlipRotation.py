@@ -269,13 +269,13 @@ def QCFlipRotation(
                 nanMeanX = np.nanmean(walkMarkerX)
                 nanMeanY = np.nanmean(walkMarkerY)
     
-    ## ->           test for 90° rot        
+    ## ->           test for 90° rot
     #               abs(nanMeanX-1) >= 0.4 --> nanMeanX <= 0.6 OR >= 1.4 
     #               abs(nanMeanX-1) <= 1.6 --> nanMeanX <= 2.6 OR >= -0.6
                 if abs(nanMeanX-1) >= 0.4 and abs(nanMeanX-1) <= 1.6:
 #   #                   DIFFERENCE
     #                   ==========                   
-    #                   This problem is related to how the X,Y,Z axis are rotated in 3D space and which side the 
+    #                   This problem is related to how the X,Y,Z axis are rotated in 3D space and which side th9e 
     #                   accelerometer is mounted, in order for the calculations to be correct.
     #                   ==========
     #                   check if 'nanMeanY' near 1G                    
@@ -420,7 +420,7 @@ def QCFlipRotation(
                     if not np.isnan(nanMeanZ) and notNanZNum > minSitT:
                         if abs(nanMeanZ-1) < 0.4:
                             qcData['zFlipValue'][mtSeg,0] = 1 #not-flip
-                        elif abs(nanMeanZ) < 0.6:
+                        elif nanMeanZ < -0.6 or nanMeanZ > -1.4:
                             qcData['zFlipValue'][mtSeg,0] = -1 #flip
                         zFlipCalcLength[mtSeg,0] = notNanZNum
         

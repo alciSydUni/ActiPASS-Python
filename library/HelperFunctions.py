@@ -3,7 +3,7 @@ from typing import Tuple, Optional
 from numpy.typing import NDArray
 from scipy.ndimage import label
 from datetime import datetime, timedelta
-import padas as pd
+import pandas as pd
 
 def RLEIndeces(values: np.ndarray, counts: np.ndarray) -> Tuple[NDArray[np.int64], NDArray[np.int64]]:
     startIndeces = np.zeros_like(values, dtype = int)
