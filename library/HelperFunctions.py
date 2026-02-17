@@ -42,8 +42,19 @@ def MatlabMovMean(arr, window):
         finalArr[i] = np.mean(arr[start:end])
     return finalArr #return shape (N,)
 
+
 def MatlabDatenumToDate(dn: float) -> datetime:
     return datetime.fromordinal(int(dn)) - timedelta(days=366) + timedelta(days=dn % 1)
+
+
+def matlabDatenum (date: datetime) -> float:
+    return (date - datetime(1,1,1) + timedelta(days= 366)).total_seconds() / 86400
+
+
+def matlabDatenumArr (dates: Union[List[datetime], np.ndarray]) -> np.ndarray:
+    yearOne = datetime(1,1,1)
+    delta = timedelta(days=366)
+    return np.array([(d - yearOne + delta).total_seconds()/86400 for d in dates]) #(N,)
 
 
 def ChangeAxes(Acc: pd.DataFrame, devType: str, oType: int, rangeObj: Optional[range] = None) -> pd.DataFrame:  
