@@ -14,7 +14,7 @@ def ActivityDetect(Acc: pd.DataFrame, SF: int, tSeries: pd.Series, VRefThigh: np
 
 ## ->   Setup time component of Acc
     lenAcc = Acc.shape[0]
-    timeDtNm = tSeries[0] + (np.arange(lenAcc))/SF/86400
+    timeDtNmS = tSeries[0] + np.arange(np.floor((lenAcc-1)/SF)+1)/86400
 
 ## ->   Rotation matrix
     rotFB = np.array([
@@ -119,7 +119,7 @@ def ActivityDetect(Acc: pd.DataFrame, SF: int, tSeries: pd.Series, VRefThigh: np
     combArr = AktFilt.AktFilt(combArr,'sit',ParamsAP)
 
 ## ->   return
-    return combArr, timeDtNm, FB, accRotLowMSTD_1S
+    return combArr, timeDtNmS, FB, accRotLowMSTD_1S
 
 
 def CalcCycle(maybeCycle: np.ndarray, tStrCcl: int, FB: pd.Series, Acc: pd.DataFrame, SF: int) -> np.ndarray:
